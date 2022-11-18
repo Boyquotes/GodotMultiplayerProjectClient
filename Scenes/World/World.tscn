@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://nq3uexw456ce"]
+
+[ext_resource type="Script" path="res://Scripts/World/World.gd" id="1_dg2ky"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_dg2ky")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 1, 20)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+omni_range = 10.0

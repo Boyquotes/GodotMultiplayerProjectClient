@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ppxtwlo2gl0x"]
+
+[ext_resource type="Script" path="res://Scripts/Network/Network.gd" id="1_kxa5o"]
+[ext_resource type="PackedScene" uid="uid://dtqhs3uhkvhr0" path="res://Scenes/Network/PlayerController.tscn" id="2_nwjbo"]
+
+[node name="Network" type="Node"]
+script = ExtResource("1_kxa5o")
+
+[node name="PlayerNodeSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Network/PlayerNode.tscn", "res://Scenes/Player/PlayerCharacter.tscn")
+spawn_path = NodePath("../PlayerController")
+spawn_limit = 4
+
+[node name="PlayerController" parent="." instance=ExtResource("2_nwjbo")]

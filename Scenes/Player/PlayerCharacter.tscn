@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7n2iqchl0gbd"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCharacter.gd" id="1_2xqvm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4woja"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uat50"]
+albedo_color = Color(0.8, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ilu48"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ba8ij"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_2xqvm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_4woja")
+surface_material_override/0 = SubResource("StandardMaterial3D_uat50")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ilu48")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ba8ij")
