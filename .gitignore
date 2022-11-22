@@ -11,3 +11,11 @@ export_presets.cfg
 data_*/
 
 .godot/
+
+
+
+MultiplayerGame - Client.cmd
+MultiplayerGame - Client.exe
+MultiplayerGame - Client.pck
+MultiplayerGame - Client.sh
+MultiplayerGame - Client.x86_64
