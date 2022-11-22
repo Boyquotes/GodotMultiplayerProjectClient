@@ -11,6 +11,7 @@ func _ready():
 
 
 	GameState.connect("click_terrain", _click_terrain)
+	GameState.connect("click_unit", _click_unit)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,14 +20,22 @@ func _ready():
 
 
 
-func _click_terrain(target_position):
-	print("clicked at .. : ", target_position)
+
+func _click_terrain(click_position):
+	print("clicked at .. : ", click_position)
 	
 	if last_waypoint_flag:
 		last_waypoint_flag.queue_free()
 	var waypoint_flag = WaypointFlagScene.instantiate()
 	add_child(waypoint_flag)
-	waypoint_flag.transform.origin = target_position
+	waypoint_flag.transform.origin = click_position
 	
 	last_waypoint_flag = waypoint_flag
-	Network.rpc("order_move", target_position)
+	
+	Network.rpc("order_move", click_position)
+		
+		
+func _click_unit(unit):
+	var player_node = Network.get_player_node()
+#	if player_node.team != unit.team:
+	Network.rpc("order_attack", unit.get_path())

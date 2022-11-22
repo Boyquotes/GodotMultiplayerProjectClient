@@ -7,7 +7,8 @@ var player_name : String
 
 # slot in team
 var player_slot : int
-@export var position : Vector3
+
+var team : int
 @export var character_node : CharacterBody3D
 #var sync_state:
 #	get:
@@ -44,10 +45,11 @@ func _ready():
 	# pass stuff to playercontroller
 	if self.name == str(Network.multiplayer.get_unique_id()):
 		get_parent().my_player_node = self
-		print(get_parent(), " was assigned: ", self)
+#		print(get_parent(), " was assigned: ", self)
 
 	else:
-		print("aaaaa", get_parent().name)
+#		print("aaaaa", get_parent().name)
+		pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -6,7 +6,9 @@ const DEFAULT_PORT = 8006
 
 @onready var player_controller : Node = $PlayerController
 const Player = preload("res://Scenes/Network/PlayerNode.tscn")
+
 var player_slots = [0, 0, 0, 0, 0, 0, 0, 0]
+var num_teams = 2
 
 var peer = ENetMultiplayerPeer.new()
 
@@ -24,6 +26,14 @@ func start_client(ip):
 
 func set_player_slots():
 	print("player slots updated! ", player_slots)
+
+	# update teams
+	for i in range(player_slots.size()):
+		var player_id = player_slots[i]
+		if player_id != 0:
+			get_player_node_id(player_id).team = i % num_teams
+			print(get_player_node_id(player_id), " was assigned team ", get_player_node_id(player_id).team)
+
 	if get_parent().has_node('MenuControlNode'):
 		get_parent().get_node('MenuControlNode').update_player_list()
 
@@ -48,4 +58,8 @@ func update_lobby_player_list(slots):
 
 @rpc(any_peer)
 func order_move(_position):
+	pass
+
+@rpc(any_peer)
+func order_attack(_node_path):
 	pass

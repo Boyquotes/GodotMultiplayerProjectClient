@@ -46,6 +46,11 @@ func update_player_list():
 		var player_id = player_slots[p]
 		if player_id != 0:
 			names_container_node.get_node("PlayerName" + str(p)).text = str(player_id)
+			var player_node = Network.get_player_node_id(player_id)
+			if player_node.team == 0:
+				names_container_node.get_node("PlayerName" + str(p)).self_modulate = Color(0,0,1,1)
+			if player_node.team == 1:
+				names_container_node.get_node("PlayerName" + str(p)).self_modulate = Color(0.862745, 0.0784314, 0.235294, 1)
 		else:
 			names_container_node.get_node("PlayerName" + str(p)).text = ""
 

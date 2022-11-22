@@ -37,7 +37,6 @@ size_flags_vertical = 4
 color = Color(0.113725, 0.419608, 0.541176, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EscMenuWindow"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -52,7 +51,6 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/EscMenuWindow/VBoxContainer"]
-layout_mode = 2
 offset_right = 140.0
 offset_bottom = 26.0
 text = "Menu"
@@ -61,14 +59,12 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="ButtonResume" type="Button" parent="CanvasLayer/EscMenuWindow/VBoxContainer"]
-layout_mode = 2
 offset_top = 30.0
 offset_right = 140.0
 offset_bottom = 61.0
 text = "Resume"
 
 [node name="ButtonExit" type="Button" parent="CanvasLayer/EscMenuWindow/VBoxContainer"]
-layout_mode = 2
 offset_top = 65.0
 offset_right = 140.0
 offset_bottom = 96.0

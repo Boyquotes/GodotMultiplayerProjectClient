@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7n2iqchl0gbd"]
+[gd_scene load_steps=7 format=3 uid="uid://b7n2iqchl0gbd"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCharacter.gd" id="1_2xqvm"]
+[ext_resource type="PackedScene" uid="uid://dsf6kdshkq5v5" path="res://Scenes/UI/PlayerHealthBar.tscn" id="2_pe1ym"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4woja"]
 
@@ -11,13 +12,16 @@ albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ba8ij"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/sync = true
+properties/0/spawn = false
+properties/0/sync = false
 properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/sync = true
+properties/1/spawn = false
+properties/1/sync = false
+properties/2/path = NodePath(".:sync_state")
+properties/2/spawn = true
+properties/2/sync = true
 
-[node name="PlayerCharacter" type="CharacterBody3D"]
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["Unit"]]
 script = ExtResource("1_2xqvm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -29,3 +33,12 @@ shape = SubResource("CapsuleShape3D_ilu48")
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ba8ij")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("2_pe1ym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="AutoAttackSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/World/Projectiles/PlaceHolderAutoAttack.tscn")
+spawn_path = NodePath("../PlayerCharacterProjectilesNode")
+
+[node name="PlayerCharacterProjectilesNode" type="Node" parent="."]

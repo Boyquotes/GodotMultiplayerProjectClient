@@ -1,7 +1,7 @@
 extends Node
 
 signal click_terrain
-
+signal click_unit
 
 func load_world():
 	rpc('rpc_load_scene',"res://Scenes/World/World.tscn")
@@ -11,6 +11,18 @@ func load_world():
 func rpc_load_scene(path):
 	# have all clients load this scene
 	get_tree().change_scene_to_file(path)
+
+
+#@rpc
+#func sync_projectile(attacker_path, target_path):
+#	# spawn homing projectiles for all players
+#	# only aa for now
+#	var attacker_node = get_node(attacker_path)
+#	var target_node = get_node(target_path)
+#	if attacker_node and target_node:
+#		attacker_node.spawn_projectile(target_node)
+	
+
 
 #@rpc
 #func spawn_players():
