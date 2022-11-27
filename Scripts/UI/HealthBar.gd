@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready @export var bar : TextureProgressBar
+@onready @export var bar : Control
 @onready @export var viewport : SubViewport
 @onready @export var player_health_bar : Sprite3D
 
@@ -11,7 +11,6 @@ func _ready():
 	
 	bar.player_character = get_parent()
 	bar.connect_health_changed_signal()
-
 
 
 #func update_bar(amount):

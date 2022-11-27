@@ -24,6 +24,9 @@ var intersection_groups
 
 
 func _input(event):
+	if GameState.current_state != GameState.States.IN_GAME:
+		return
+		
 	if event.is_action_pressed("right_click"):
 		right_click_action()
 	elif event.is_action_pressed("ability1"):
@@ -36,7 +39,8 @@ func _input(event):
 		fire_ability(4)
 
 func right_click_action():
-	var intersection = get_mouse_intersection("all")
+		
+	var intersection = get_mouse_intersection("no_walls")
 
 	if not intersection.is_empty():
 		print("Rightclick to: ", intersection.position)
@@ -56,13 +60,14 @@ func fire_ability(ability_num):
 		my_player_node.fire_ability(ability_num, intersection)
 
 
-func spawn_camera():
+func spawn_camera(position : Vector3):
 	print("Loading player camera for server")
 	var camera = preload("res://Scenes/World/Utilities/Camera.tscn")
 	player_camera = camera.instantiate()
-	print(my_player_node)
+#	print(my_player_node)
 	player_camera.player_character = my_player_node.character_node
 	add_child(player_camera)
+	player_camera.transform.origin += position
 
 func get_mouse_intersection(ray_collision):
 	var mouse_position = get_viewport().get_mouse_position()
@@ -76,11 +81,15 @@ func get_mouse_intersection(ray_collision):
 		var intersection = space_state.intersect_ray(ray_query)
 		return intersection
 		
+	elif ray_collision == "no_walls":
+		# also no projectiles
+		ray_query.collision_mask = 125
+	
 	elif ray_collision == "terrain":
 		var col_mask = 1
-		ray_query.collision_mask = col_mask
+		ray_query.collision_mask = 1
 	
-		var intersection = space_state.intersect_ray(ray_query)
-		
-		
-		return intersection
+	var intersection = space_state.intersect_ray(ray_query)
+	
+	
+	return intersection

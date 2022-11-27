@@ -24,23 +24,9 @@ func start_client(ip):
 	multiplayer.set_multiplayer_peer(peer)
 
 
-func set_player_slots():
-	print("player slots updated! ", player_slots)
-
-	# update teams
-	for i in range(player_slots.size()):
-		var player_id = player_slots[i]
-		if player_id != 0:
-			get_player_node_id(player_id).team = i % num_teams
-			print(get_player_node_id(player_id), " was assigned team ", get_player_node_id(player_id).team)
-
-	if get_parent().has_node('MenuControlNode'):
-		get_parent().get_node('MenuControlNode').update_player_list()
-
-
 func get_player_node():
 	# return self playernode
-	print("players children: ", player_controller.get_children())
+#	print("players children: ", player_controller.get_children())
 	return player_controller.get_node(str(multiplayer.get_unique_id()))
 	
 
@@ -49,11 +35,14 @@ func get_player_node_id(id):
 
 
 @rpc
-func update_lobby_player_list(slots):
-#	print("RPC called by: ", multiplayer.get_remote_sender_id())
-	player_slots = slots
-	print("RPC received by: ", multiplayer.get_unique_id())
-	set_player_slots()
+func sync_player_team(player_id, team, team_color):
+	var player_node = get_player_node_id(player_id)
+	player_node.team = team
+	player_node.team_color = team_color
+
+@rpc(any_peer)
+func player_switch_team(team_start, team_end):
+	pass
 	
 
 @rpc(any_peer)

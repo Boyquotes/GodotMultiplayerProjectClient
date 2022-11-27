@@ -57,4 +57,14 @@ func _ready():
 	var parent_node = get_parent()
 	if parent_node.name == str(Network.multiplayer.get_unique_id()):
 		get_parent().character_node = self
-		Network.player_controller.spawn_camera()
+		Network.player_controller.spawn_camera(transform.origin)
+		
+	# fix collision layers and masks
+	# (temp) change player color with team
+	# potentially use setget instead of ready
+	var player_mesh : MeshInstance3D = $PlayerMesh3D
+	var newMaterial = StandardMaterial3D.new() #Make a new Spatial Material
+	
+	newMaterial.albedo_color = parent_node.team_color
+
+	player_mesh.material_override = newMaterial #Assign new material to material overrride

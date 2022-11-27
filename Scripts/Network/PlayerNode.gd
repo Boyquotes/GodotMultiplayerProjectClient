@@ -3,13 +3,9 @@
 
 extends Node
 
-var player_name : String
-
-# slot in team
-var player_slot : int
-
-var team : int
-@export var character_node : CharacterBody3D
+@export var team : String
+var team_color : Color
+var character_node : CharacterBody3D
 #var sync_state:
 #	get:
 #		var buf = PackedByteArray()
@@ -32,7 +28,7 @@ var team : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Player Created. Name: %s" % player_name)
+#	print("Player Created. Name: %s" % player_name)
 
 	# should be done on game start instead of player joining
 #	print("loading player model")
@@ -65,9 +61,9 @@ func _ready():
 #	print("Instantiated Player %s at position " % player_name, character_node.transform.origin)
 
 
-func _notification(what):
-	if what == NOTIFICATION_PREDELETE:
-		print("Player deleted. Name: %s" % player_name)
+#func _notification(what):
+#	if what == NOTIFICATION_PREDELETE:
+#		print("Player deleted. Name: %s" % player_name)
 
 
 

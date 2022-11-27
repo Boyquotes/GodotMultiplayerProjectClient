@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node",
+"class": &"Team",
+"language": &"GDScript",
+"path": "res://Scripts/Network/Team.gd"
+}]
+_global_script_class_icons={
+"Team": ""
+}
+
 [application]
 
 config/name="MultiplayerGame - Client"

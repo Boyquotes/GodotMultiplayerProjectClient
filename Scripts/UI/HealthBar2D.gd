@@ -1,7 +1,8 @@
-extends TextureProgressBar
+extends Control
 
 var player_character
-
+@export var bar_name : Label
+@export var progress_bar : TextureProgressBar
 # Called when the node enters the scene tree for the first time.
 #func _ready():
 
@@ -15,11 +16,16 @@ func connect_health_changed_signal():
 	# initialize values once
 	update_bar(player_character.current_hp)
 	update_max(player_character.max_hp)
+	update_label(player_character.get_parent().name)
+
+func update_label(text):
+	bar_name.text = text
+
 
 func update_bar(amount):
 #	print("set current: ", amount)
-	value = amount
+	progress_bar.value = amount
 
 func update_max(amount):
 #	print("set max: ", amount)
-	max_value = amount
+	progress_bar.max_value = amount
