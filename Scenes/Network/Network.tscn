@@ -9,6 +9,5 @@ script = ExtResource("1_kxa5o")
 [node name="PlayerNodeSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/Network/PlayerNode.tscn", "res://Scenes/Player/PlayerCharacter.tscn")
 spawn_path = NodePath("../PlayerController")
-spawn_limit = 4
 
 [node name="PlayerController" parent="." instance=ExtResource("2_nwjbo")]

@@ -17,7 +17,9 @@ func connect_health_changed_signal():
 	update_bar(player_character.current_hp)
 	update_max(player_character.max_hp)
 	update_label(player_character.get_parent().name)
-
+	update_color(player_character.team)
+	
+	
 func update_label(text):
 	bar_name.text = text
 
@@ -26,6 +28,11 @@ func update_bar(amount):
 #	print("set current: ", amount)
 	progress_bar.value = amount
 
+
 func update_max(amount):
 #	print("set max: ", amount)
 	progress_bar.max_value = amount
+
+
+func update_color(team):
+	$TextureRect.texture = load("res://Assets/UI/PlayerBar%s.tres" % team)

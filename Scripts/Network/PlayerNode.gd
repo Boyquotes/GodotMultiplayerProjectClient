@@ -5,7 +5,10 @@ extends Node
 
 @export var team : String
 var team_color : Color
+
 var character_node : CharacterBody3D
+var character_resource
+
 #var sync_state:
 #	get:
 #		var buf = PackedByteArray()

@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MultiplayerGame - Client"
-run/main_scene="res://Scenes/Menus/start_menu.tscn"
+run/main_scene="res://Scenes/Menu/start_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -29,12 +29,12 @@ config/icon="res://icon.svg"
 
 Network="*res://Scenes/Network/Network.tscn"
 GameState="*res://Scripts/Singleton/GameState.gd"
-EscMenu="*res://Scenes/Menus/esc_menu.tscn"
+EscMenu="*res://Scenes/Menu/esc_menu.tscn"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"

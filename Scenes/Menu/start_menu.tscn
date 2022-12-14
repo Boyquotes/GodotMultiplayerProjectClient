@@ -1,0 +1,214 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqpf58xorr7iw"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/start_menu.gd" id="1_hyhji"]
+[ext_resource type="FontFile" uid="uid://c0o2kahu5do06" path="res://Assets/Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_yj88e"]
+[ext_resource type="PackedScene" uid="uid://bsey18i1hfmy4" path="res://Scenes/Menu/player_box_lobby.tscn" id="3_owbaa"]
+[ext_resource type="PackedScene" uid="uid://i0ggfnj3goaa" path="res://Scenes/Menu/switch_team_button.tscn" id="4_wpxng"]
+
+[sub_resource type="Theme" id="Theme_g8oxo"]
+default_font = ExtResource("1_yj88e")
+default_font_size = 28
+
+[node name="MenuControlNode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g8oxo")
+script = ExtResource("1_hyhji")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g8oxo")
+color = Color(0.0392157, 0, 0.32549, 1)
+metadata/_edit_group_ = true
+
+[node name="StartMenu" type="VSplitContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -96.0
+offset_right = 160.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g8oxo")
+theme_override_constants/separation = 63
+split_offset = 60
+dragger_visibility = 1
+
+[node name="JoinButton" type="Button" parent="StartMenu"]
+offset_right = 320.0
+offset_bottom = 192.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.88
+text = "Join"
+
+[node name="JoinMenu" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -176.0
+offset_right = 160.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g8oxo")
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="IPAdressField" type="TextEdit" parent="JoinMenu"]
+offset_right = 320.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.77
+placeholder_text = "Enter IP Adress"
+
+[node name="ButtonContainer" type="VSplitContainer" parent="JoinMenu"]
+custom_minimum_size = Vector2(0, 192)
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 63
+split_offset = 60
+dragger_visibility = 1
+
+[node name="JoinButton" type="Button" parent="JoinMenu/ButtonContainer"]
+offset_right = 320.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+text = "Join Lobby"
+
+[node name="BackButton" type="Button" parent="JoinMenu/ButtonContainer"]
+offset_top = 127.0
+offset_right = 320.0
+offset_bottom = 192.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.88
+text = "Back
+"
+
+[node name="LobbyMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g8oxo")
+
+[node name="LobbyNavigation" type="HBoxContainer" parent="LobbyMenu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -112.0
+offset_right = 320.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_g8oxo")
+theme_override_constants/separation = 30
+
+[node name="Back" type="Button" parent="LobbyMenu/LobbyNavigation"]
+offset_right = 640.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="PlayerBox" parent="LobbyMenu" instance=ExtResource("3_owbaa")]
+box_team = "Blue"
+
+[node name="SwitchTeamButton" parent="LobbyMenu/PlayerBox" instance=ExtResource("4_wpxng")]
+
+[node name="PlayerBox2" parent="LobbyMenu" instance=ExtResource("3_owbaa")]
+anchor_left = 0.9
+anchor_right = 0.9
+offset_left = -320.0
+offset_right = 0.0
+box_team = "Red"
+
+[node name="SwitchTeamButton" parent="LobbyMenu/PlayerBox2" instance=ExtResource("4_wpxng")]
+
+[node name="LobbyNameLabel" type="Label" parent="LobbyMenu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme = SubResource("Theme_g8oxo")
+text = "Lobby Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LobbyTypeLabel" type="Label" parent="LobbyMenu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = SubResource("Theme_g8oxo")
+text = "Lobby Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LobbyPeerIDLabel" type="Label" parent="LobbyMenu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = -256.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme = SubResource("Theme_g8oxo")
+text = "Lobby Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ServerDisconnectedRect" type="AcceptDialog" parent="."]
+title = ""
+size = Vector2i(333, 107)
+theme = SubResource("Theme_g8oxo")
+
+[node name="Label" type="Label" parent="ServerDisconnectedRect"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 325.0
+offset_bottom = 46.0
+theme = SubResource("Theme_g8oxo")
+text = "Server Disconnected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="StartMenu/JoinButton" to="." method="_on_startmenu_join_button_pressed"]
+[connection signal="pressed" from="JoinMenu/ButtonContainer/JoinButton" to="." method="_on_joinmenu_join_button_pressed"]
+[connection signal="pressed" from="JoinMenu/ButtonContainer/BackButton" to="." method="_on_joinmenu_back_button_pressed"]
+[connection signal="pressed" from="LobbyMenu/LobbyNavigation/Back" to="." method="_on_lobbymenu_back_pressed"]

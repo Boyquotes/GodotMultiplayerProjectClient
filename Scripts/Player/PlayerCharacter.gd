@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal health_changed
 signal max_health_changed
 
-var team : int = 0
+var team : String
 var speed : int = 5
 var attack_range : int = 10
 
@@ -55,6 +55,7 @@ var sync_state:
 
 func _ready():
 	var parent_node = get_parent()
+	team = parent_node.team
 	if parent_node.name == str(Network.multiplayer.get_unique_id()):
 		get_parent().character_node = self
 		Network.player_controller.spawn_camera(transform.origin)

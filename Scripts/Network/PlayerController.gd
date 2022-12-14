@@ -87,7 +87,7 @@ func get_mouse_intersection(ray_collision):
 	
 	elif ray_collision == "terrain":
 		var col_mask = 1
-		ray_query.collision_mask = 1
+		ray_query.collision_mask = col_mask
 	
 	var intersection = space_state.intersect_ray(ray_query)
 	

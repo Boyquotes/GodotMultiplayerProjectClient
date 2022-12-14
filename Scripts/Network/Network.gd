@@ -7,8 +7,8 @@ const DEFAULT_PORT = 8006
 @onready var player_controller : Node = $PlayerController
 const Player = preload("res://Scenes/Network/PlayerNode.tscn")
 
-var player_slots = [0, 0, 0, 0, 0, 0, 0, 0]
-var num_teams = 2
+#var player_slots = [0, 0, 0, 0, 0, 0, 0, 0]
+#var num_teams = 2
 
 var peer = ENetMultiplayerPeer.new()
 
@@ -33,12 +33,20 @@ func get_player_node():
 func get_player_node_id(id):
 	return player_controller.get_node(str(id))
 
-
 @rpc
-func sync_player_team(player_id, team, team_color):
-	var player_node = get_player_node_id(player_id)
-	player_node.team = team
-	player_node.team_color = team_color
+func sync_teams_on_connect(id, player, team, team_color):
+	if id == multiplayer.get_unique_id():
+		var start_menu = get_node("root/MenuControlNode")
+		print("menu:", start_menu)
+		start_menu.rpc_on_team_joined(player, team, team_color)
+
+
+#@rpc
+#func sync_player_team(player_id, team, team_color):
+#	pass
+#	var player_node = get_player_node_id(player_id)
+#	player_node.team = team
+#	player_node.team_color = team_color
 
 @rpc(any_peer)
 func player_switch_team(team_start, team_end):

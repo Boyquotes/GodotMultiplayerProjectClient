@@ -1,16 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bui5c6kh6vqo0"]
+[gd_scene load_steps=7 format=3 uid="uid://bui5c6kh6vqo0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/HealthBar2D.gd" id="1_ervu4"]
+[ext_resource type="Texture2D" uid="uid://c1n8oo3f1pq50" path="res://Assets/UI/PlayerBarBlue.tres" id="2_eqt20"]
 [ext_resource type="FontFile" uid="uid://pvsnfof2fu54" path="res://Assets/Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="2_q1q55"]
 [ext_resource type="Texture2D" uid="uid://dj2ou1oiacaqo" path="res://Assets/Textures/gray_texture.png" id="3_wtm3b"]
 [ext_resource type="Texture2D" uid="uid://bdpvbn3qpt8d0" path="res://Assets/Textures/green_texture.png" id="4_pdl07"]
-
-[sub_resource type="Gradient" id="Gradient_ew74r"]
-offsets = PackedFloat32Array(0.00645161, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8wnf7"]
-gradient = SubResource("Gradient_ew74r")
 
 [sub_resource type="Theme" id="Theme_u4fed"]
 default_font = ExtResource("2_q1q55")
@@ -37,7 +31,7 @@ progress_bar = NodePath("ProgressBar2D")
 layout_mode = 0
 offset_right = 196.0
 offset_bottom = 64.0
-texture = SubResource("GradientTexture2D_8wnf7")
+texture = ExtResource("2_eqt20")
 
 [node name="PlayerBarLabel" type="Label" parent="."]
 layout_mode = 1

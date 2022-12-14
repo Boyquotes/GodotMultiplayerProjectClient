@@ -20,3 +20,4 @@ render_target_update_mode = 4
 [node name="PlayerBar2D" parent="SubViewport" instance=ExtResource("2_ig42x")]
 
 [node name="PlayerHealthBar" type="Sprite3D" parent="."]
+billboard = 1
