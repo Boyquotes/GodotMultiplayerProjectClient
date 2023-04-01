@@ -1,0 +1,9 @@
+[gd_resource type="Curve3D" format=3 uid="uid://bslfdurtemqm1"]
+
+[resource]
+resource_name = "BotPath"
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 40, 0, -40, 0, 0, 0, 0, 0, 0, 40, 0, 40, 0, 0, 0, 0, 0, 0, -40, 0, 40),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3

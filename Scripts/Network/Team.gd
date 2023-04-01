@@ -9,7 +9,7 @@ var members := []
 var max_size : int = 4
 
 func add_member(player_id):
-	print("adding %s to team %s" % [player_id, name])
+	#print("adding %s to team %s" % [player_id, name])
 	if len(members) <= max_size:
 		members.append(player_id)
 	else:
@@ -21,7 +21,7 @@ func remove_member(player_id):
 #	push_error("Tried to remove %s from team %s but didn't occur" % [player_id, team_name])
 
 func team_size():
-#	print(name, " number of members: ", len(members))
+#	#print(name, " number of members: ", len(members))
 	return len(members)
 
 func is_full():

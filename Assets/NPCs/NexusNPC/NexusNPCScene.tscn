@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://beohils2vvdtr"]
+
+[ext_resource type="Material" uid="uid://deplh2y0wdfnq" path="res://Assets/NPCs/NexusNPC/NexusNPCMaterial.tres" id="1_u2ong"]
+[ext_resource type="Material" uid="uid://ulgpbularoey" path="res://Assets/NPCs/NexusNPC/NexusNPCMidMaterial.tres" id="2_2bmqs"]
+
+[node name="NexusNPCScene" type="Node3D"]
+
+[node name="CSGNexusOuterRing" type="CSGTorus3D" parent="."]
+inner_radius = 0.7
+outer_radius = 5.0
+sides = 6
+ring_sides = 10
+smooth_faces = false
+material = ExtResource("1_u2ong")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 2.0
+height = 3.0
+sides = 6
+material = ExtResource("1_u2ong")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 0.646, 0, -1, 0, -4.37114e-08, 0, 2.51725, 0)
+radius = 2.0
+radial_segments = 6
+rings = 4
+smooth_faces = false
+material = ExtResource("2_2bmqs")

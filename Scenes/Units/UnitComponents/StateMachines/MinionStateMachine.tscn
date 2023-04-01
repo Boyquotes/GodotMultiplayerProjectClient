@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://2p6ey3mawarx"]
+
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/MinionStates/MinionStateMachine.gd" id="1_h28w7"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/BaseStateClass.gd" id="2_uf3tg"]
+
+[node name="MinionStateMachine" type="Node"]
+script = ExtResource("1_h28w7")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="Rooted" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="TargetUnit" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="AttackUnit" type="Node" parent="."]
+script = ExtResource("2_uf3tg")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("2_uf3tg")

@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://pwuq03fp1muo"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Minions/MinionUnit.gd" id="1_gbdrv"]
+[ext_resource type="Resource" uid="uid://gluv2xn3ou4p" path="res://Assets/Minions/MeleeMinion/MeleeMinionResource.tres" id="2_ejivu"]
+[ext_resource type="PackedScene" uid="uid://cmvo3scldjngs" path="res://Assets/Minions/MeleeMinion/MeleeMinionScene.tscn" id="3_p104n"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitSceneScript.gd" id="4_34cnx"]
+[ext_resource type="PackedScene" uid="uid://b5e2m7a007uq7" path="res://Scenes/UI/NPCHealthBar.tscn" id="5_ysdaa"]
+[ext_resource type="PackedScene" uid="uid://2p6ey3mawarx" path="res://Scenes/Units/UnitComponents/StateMachines/MinionStateMachine.tscn" id="6_vlglj"]
+[ext_resource type="PackedScene" uid="uid://sf4mqh1krqaw" path="res://Scenes/Units/UnitComponents/UnitAnimationManager.tscn" id="7_ll20u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkw2c"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6fe0e"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("MinionStateMachine:network_state_name")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:mp_sync")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="MeleeMinion" type="CharacterBody3D" node_paths=PackedStringArray("state_machine", "HealthBar", "animation_manager", "unit_scene") groups=["Unit"]]
+collision_layer = 7
+collision_mask = 4
+script = ExtResource("1_gbdrv")
+state_machine = NodePath("MinionStateMachine")
+HealthBar = NodePath("HealthBarNode")
+animation_manager = NodePath("AnimationManager")
+character_resource = ExtResource("2_ejivu")
+unit_scene = NodePath("MeleeMinionScene")
+
+[node name="MeleeMinionScene" parent="." instance=ExtResource("3_p104n")]
+script = ExtResource("4_34cnx")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("5_ysdaa")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dkw2c")
+
+[node name="MinionStateMachine" parent="." instance=ExtResource("6_vlglj")]
+
+[node name="AnimationManager" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("7_ll20u")]
+state_machine = NodePath("../MinionStateMachine")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6fe0e")

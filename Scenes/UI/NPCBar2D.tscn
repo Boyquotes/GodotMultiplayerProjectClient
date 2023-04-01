@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcid1yp6rqly0"]
+
+[ext_resource type="Script" path="res://Scripts/UI/NPCBar2D.gd" id="1_h8o4j"]
+[ext_resource type="Texture2D" uid="uid://dj2ou1oiacaqo" path="res://Assets/UI/Textures/gray_texture.png" id="3_hckmf"]
+[ext_resource type="Texture2D" uid="uid://bdpvbn3qpt8d0" path="res://Assets/UI/Textures/green_texture.png" id="4_nxy7j"]
+
+[node name="PlayerBar2D" type="Control" node_paths=PackedStringArray("health_bar")]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 3
+anchor_left = 0.447917
+anchor_top = 0.453704
+anchor_right = 0.552083
+anchor_bottom = 0.546296
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_h8o4j")
+health_bar = NodePath("HealthBar")
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1000.0
+value = 1000.0
+nine_patch_stretch = true
+stretch_margin_right = 200
+stretch_margin_bottom = 30
+texture_under = ExtResource("3_hckmf")
+texture_progress = ExtResource("4_nxy7j")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

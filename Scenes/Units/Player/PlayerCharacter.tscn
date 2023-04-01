@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://bhdan42w2i7eq"]
+
+[ext_resource type="Script" path="res://Scripts/Units/CharacterUnit.gd" id="1_dtd4m"]
+[ext_resource type="Resource" uid="uid://c6xbijec73yhh" path="res://Assets/Mechs/FireMech/FireMechResource.tres" id="2_clusw"]
+[ext_resource type="PackedScene" uid="uid://2o248gplijg6" path="res://Scenes/Units/UnitComponents/StateMachines/UnitStateMachine.tscn" id="3_h2u15"]
+[ext_resource type="PackedScene" uid="uid://cpxngol06ie37" path="res://Scenes/Units/UnitComponents/UnitNavigationComponent.tscn" id="4_3n80e"]
+[ext_resource type="PackedScene" uid="uid://db6laxtr6t35e" path="res://Scenes/UI/PlayerHealthBar.tscn" id="4_5tdye"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitExperienceComponent.gd" id="5_jj8ks"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitManaComponent.gd" id="6_ossya"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lfchn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uu1lw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4rykp"]
+properties/0/path = NodePath(".:sync_state")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="CharacterUnit" type="CharacterBody3D" node_paths=PackedStringArray("state_machine", "nav_component", "mana_component", "experience_component", "PlayerHealthBar")]
+script = ExtResource("1_dtd4m")
+state_machine = NodePath("UnitStateMachine")
+nav_component = NodePath("UnitNavigationComponent")
+mana_component = NodePath("UnitManaComponent")
+experience_component = NodePath("UnitExperienceComponent")
+PlayerHealthBar = NodePath("HealthBarNode")
+character_resource = ExtResource("2_clusw")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("4_5tdye")]
+
+[node name="PlayerMesh3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_lfchn")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uu1lw")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4rykp")
+
+[node name="PlayerNavAgent" type="NavigationAgent3D" parent="."]
+
+[node name="UnitStateMachine" parent="." instance=ExtResource("3_h2u15")]
+
+[node name="UnitNavigationComponent" parent="." node_paths=PackedStringArray("nav_agent", "state_machine") instance=ExtResource("4_3n80e")]
+nav_agent = NodePath("../PlayerNavAgent")
+state_machine = NodePath("../UnitStateMachine")
+
+[node name="UnitExperienceComponent" type="Node" parent="."]
+script = ExtResource("5_jj8ks")
+
+[node name="UnitManaComponent" type="Node" parent="."]
+script = ExtResource("6_ossya")

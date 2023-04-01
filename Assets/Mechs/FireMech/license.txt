@@ -1,0 +1,11 @@
+Model Information:
+* title:	Robot A.L.E.X
+* source:	https://sketchfab.com/3d-models/robot-alex-82fcab4a190f4663ab2717dc5f40e40e
+* author:	shonwall360 (https://sketchfab.com/shonwall360)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Robot A.L.E.X" (https://sketchfab.com/3d-models/robot-alex-82fcab4a190f4663ab2717dc5f40e40e) by shonwall360 (https://sketchfab.com/shonwall360) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

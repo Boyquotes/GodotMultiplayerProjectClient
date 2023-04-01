@@ -6,6 +6,5 @@
 script = ExtResource("1_3tvvi")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/Player/PlayerCharacter.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/Units/Mechs/FireMech.tscn")
 spawn_path = NodePath("..")
-spawn_limit = 1

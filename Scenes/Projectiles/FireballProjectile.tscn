@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct16hm8p2c1he"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/FireBallProjectile.gd" id="1_gm802"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f33u8"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_8xqk2"]
+material = SubResource("StandardMaterial3D_f33u8")
+radius = 0.25
+radial_steps = 5
+sections = 2
+section_length = 0.5
+section_rings = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feojh"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xb4t0"]
+material = SubResource("StandardMaterial3D_feojh")
+radius = 0.25
+height = 0.5
+radial_segments = 5
+rings = 3
+is_hemisphere = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0f2ya"]
+radius = 0.25
+height = 1.0
+
+[node name="FireballProjectile" type="Node3D" node_paths=PackedStringArray("lifespan_timer")]
+script = ExtResource("1_gm802")
+lifespan_timer = NodePath("ProjectileLifespanTimer")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 12
+input_ray_pickable = false
+
+[node name="MeshInstance3DBase" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TubeTrailMesh_8xqk2")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3DTop" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, -0.491402)
+mesh = SubResource("SphereMesh_xb4t0")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -6.99517e-08, 1, 0, -1.60031, -4.37114e-08, -1.77636e-15, -1.77636e-15, -0.187028)
+shape = SubResource("CapsuleShape3D_0f2ya")
+
+[node name="ProjectileLifespanTimer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="ProjectileLifespanTimer" to="." method="_on_projectile_lifespan_timer_timeout"]

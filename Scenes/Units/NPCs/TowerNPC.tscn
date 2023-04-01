@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://w1220dq8b0qs"]
+
+[ext_resource type="Script" path="res://Scripts/Units/NPCs/TowerNPCUnit.gd" id="1_831pd"]
+[ext_resource type="Resource" uid="uid://dkv0vkxxke7tk" path="res://Assets/NPCs/TowerNPC/TowerNPCResource.tres" id="2_wkhwo"]
+[ext_resource type="PackedScene" uid="uid://voj8ser2ex8e" path="res://Assets/NPCs/TowerNPC/TowerNPCScene.tscn" id="3_16yg8"]
+[ext_resource type="PackedScene" uid="uid://b5e2m7a007uq7" path="res://Scenes/UI/NPCHealthBar.tscn" id="4_51dck"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitSceneScript.gd" id="4_fqpjt"]
+[ext_resource type="PackedScene" uid="uid://x2qoan7ft8ok" path="res://Scenes/Units/UnitComponents/StateMachines/TowerNPCStateMachine.tscn" id="6_c17cq"]
+[ext_resource type="PackedScene" uid="uid://sf4mqh1krqaw" path="res://Scenes/Units/UnitComponents/UnitAnimationManager.tscn" id="7_uvky5"]
+[ext_resource type="PackedScene" uid="uid://bb37puc16hplk" path="res://Scenes/Units/UnitComponents/AutoAttackComponent.tscn" id="8_qqihp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_omtrf"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vy75o"]
+height = 3.0
+radius = 7.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5h00"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.54902)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yh4w"]
+transparency = 1
+albedo_color = Color(0.278431, 0, 0, 0.54902)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sbbsx"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("TowerNPCStateMachine:network_state_name")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:mp_sync")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="TowerNPC" type="CharacterBody3D" node_paths=PackedStringArray("aggresion_shape", "state_machine", "HealthBar", "animation_manager", "unit_scene") groups=["Unit"]]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
+collision_layer = 7
+collision_mask = 4
+script = ExtResource("1_831pd")
+aggresion_shape = NodePath("AggroArea3D/CollisionShape3D")
+state_machine = NodePath("TowerNPCStateMachine")
+HealthBar = NodePath("HealthBarNode")
+animation_manager = NodePath("AnimationManager")
+character_resource = ExtResource("2_wkhwo")
+unit_scene = NodePath("TowerNPCScene")
+
+[node name="TowerNPCScene" parent="." instance=ExtResource("3_16yg8")]
+script = ExtResource("4_fqpjt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("CapsuleShape3D_omtrf")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("4_51dck")]
+
+[node name="AggroArea3D" type="Area3D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AggroArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_vy75o")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154, 0, -1.34631e-08)
+radius = 0.1
+height = 1.0
+material = SubResource("StandardMaterial3D_x5h00")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154, 3, -0.8)
+visible = false
+radius = 0.1
+height = 1.0
+material = SubResource("StandardMaterial3D_x5h00")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCylinder3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+radius = 0.1
+height = 5.0
+material = SubResource("StandardMaterial3D_5yh4w")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.91069e-15, 0, 1, 0, 0, 0)
+radius = 0.1
+height = 1.0
+material = SubResource("StandardMaterial3D_x5h00")
+
+[node name="TowerNPCStateMachine" parent="." instance=ExtResource("6_c17cq")]
+
+[node name="AnimationManager" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("7_uvky5")]
+state_machine = NodePath("../TowerNPCStateMachine")
+
+[node name="AutoAttackComponent" parent="." instance=ExtResource("8_qqihp")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_sbbsx")

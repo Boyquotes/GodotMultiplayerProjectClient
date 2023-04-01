@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b7n2iqchl0gbd"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCharacter.gd" id="1_2xqvm"]
-[ext_resource type="PackedScene" uid="uid://bc0rrycmb463b" path="res://Scenes/UI/PlayerHealthBar.tscn" id="2_pe1ym"]
+[ext_resource type="PackedScene" uid="uid://db6laxtr6t35e" path="res://Scenes/UI/PlayerHealthBar.tscn" id="2_pe1ym"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4woja"]
 

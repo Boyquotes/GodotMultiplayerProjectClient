@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://f0da7e5mleho"]
+
+[ext_resource type="Texture2D" uid="uid://cfggj8psxe238" path="res://Assets/UI/Textures/black_texture.png" id="1_18yji"]
+[ext_resource type="Texture2D" uid="uid://xgcss86gwapy" path="res://Assets/UI/Textures/blue_texture.png" id="2_204sy"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUI/mana_progress_bar.gd" id="3_8qhce"]
+
+[node name="ManaProgressBar" type="TextureProgressBar" node_paths=PackedStringArray("mana_label", "mana_regen_label")]
+offset_right = 450.0
+offset_bottom = 31.0
+size_flags_vertical = 3
+value = 70.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_18yji")
+texture_progress = ExtResource("2_204sy")
+script = ExtResource("3_8qhce")
+mana_label = NodePath("ManaLabel")
+mana_regen_label = NodePath("RegenMarginContainer/RegenLabel")
+
+[node name="ManaLabel" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegenMarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 5
+
+[node name="RegenLabel" type="Label" parent="RegenMarginContainer"]
+offset_left = 403.0
+offset_top = 2.0
+offset_right = 445.0
+offset_bottom = 28.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "+10/s"

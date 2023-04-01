@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BaseCharacter" load_steps=2 format=3 uid="uid://c6xbijec73yhh"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Characters/BaseCharacterResource.gd" id="1_ru7el"]
+
+[resource]
+script = ExtResource("1_ru7el")
+hp = 0
+hp_growth = 0
+hp_regen = 0
+hp_regen_growth = 0
+mana = 0
+mana_growth = 0
+mana_regen = 0
+mana_regen_growth = 0
+attack_range = 0
+attack_range_growth = 0
+attack_speed = 0.0
+attack_speed_growth = 0.0
+attack_windup = 0.0
+speed = 0
+radius = 0.0
+ability_resource_array = Array[Resource("res://Scripts/Resources/Abilities/BaseAbilityResource.gd")]([])

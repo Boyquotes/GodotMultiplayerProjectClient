@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://brvm6w467rfb4"]
+
+[ext_resource type="Script" path="res://Scripts/World/Utilities/SpawnManager.gd" id="1_8vn20"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bra67"]
+properties/0/path = NodePath(".:team")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="SpawnManager" type="Path3D"]
+script = ExtResource("1_8vn20")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Units/Minions/MeleeMinion.tscn", "res://Scenes/Units/Minions/RangedMinion.tscn")
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_bra67")

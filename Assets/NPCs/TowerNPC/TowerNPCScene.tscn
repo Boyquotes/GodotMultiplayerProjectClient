@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://voj8ser2ex8e"]
+
+[ext_resource type="Material" uid="uid://cj4chkatklpnj" path="res://Assets/NPCs/TowerNPC/TowerNPCMaterial.tres" id="2_mejsl"]
+
+[node name="TowerNPCScene" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+height = 3.0
+sides = 6
+material = ExtResource("2_mejsl")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+inner_radius = 0.3
+smooth_faces = false
+material = ExtResource("2_mejsl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.65, 1.8, -0.35)
+size = Vector3(0.5, 2, 0.25)
+material = ExtResource("2_mejsl")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81056, -0.705969)
+size = Vector3(0.5, 2, 0.25)
+material = ExtResource("2_mejsl")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -0.65, 1.8, -0.35)
+size = Vector3(0.5, 2, 0.25)
+material = ExtResource("2_mejsl")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+radius = 1.0
+height = 0.375
+sides = 6
+material = ExtResource("2_mejsl")

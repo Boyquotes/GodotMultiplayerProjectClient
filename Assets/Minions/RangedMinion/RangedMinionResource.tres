@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BaseCharacter" load_steps=2 format=3 uid="uid://v6t2ojkh17f1"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Characters/BaseCharacterResource.gd" id="1_3nanq"]
+
+[resource]
+script = ExtResource("1_3nanq")
+hp = 250
+hp_growth = null
+hp_regen = null
+hp_regen_growth = null
+mana = null
+mana_growth = null
+mana_regen = null
+mana_regen_growth = null
+attack_range = 6
+attack_range_growth = null
+attack_speed = 1.0
+attack_speed_growth = null
+attack_windup = 1.0
+speed = 5
+radius = 0.5
+ability_resource_array = null

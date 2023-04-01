@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqjgr4bsey23a"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUI/stats_row.gd" id="1_ibt2v"]
+
+[node name="StatsRow" type="HBoxContainer" node_paths=PackedStringArray("value_label", "icon_label")]
+script = ExtResource("1_ibt2v")
+value_label = NodePath("StatLabel")
+icon_label = NodePath("IconLabel")
+
+[node name="IconLabel" type="Label" parent="."]
+offset_right = 39.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+text = "Stats"
+
+[node name="StatLabel" type="Label" parent="."]
+offset_left = 43.0
+offset_right = 82.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+text = "Stats"

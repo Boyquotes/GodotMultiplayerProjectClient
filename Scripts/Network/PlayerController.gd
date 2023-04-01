@@ -43,8 +43,8 @@ func right_click_action():
 	var intersection = get_mouse_intersection("no_walls")
 
 	if not intersection.is_empty():
-		print("Rightclick to: ", intersection.position)
-		print("Intersection : ", intersection.collider, intersection.collider.get_groups())
+#		print("Rightclick to: ", intersection.position)
+#		print("Intersection : ", intersection.collider, intersection.collider.get_groups())
 		var intersection_groups = intersection.collider.get_groups()
 		if &'Terrain' in intersection_groups:
 			GameState.emit_signal("click_terrain", intersection.position)
@@ -61,7 +61,7 @@ func fire_ability(ability_num):
 
 
 func spawn_camera(position : Vector3):
-	print("Loading player camera for server")
+	print("Loading player camera for player")
 	var camera = preload("res://Scenes/World/Utilities/Camera.tscn")
 	player_camera = camera.instantiate()
 #	print(my_player_node)

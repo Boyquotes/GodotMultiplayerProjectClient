@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://om8gyttcmxuu"]
+
+[ext_resource type="Material" uid="uid://b4tf2axwrckqo" path="res://Assets/Minions/MeleeMinion/MeleeMinionMaterial.tres" id="2_3g83h"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ejtog"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_23ox4"]
+height = 0.25
+
+[sub_resource type="Curve" id="Curve_nds1d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.075, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0, Vector2(0.925, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_gyys5"]
+radial_steps = 16
+curve = SubResource("Curve_nds1d")
+
+[node name="RangedMinionScene" type="Node3D"]
+
+[node name="Cube" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+mesh = SubResource("BoxMesh_ejtog")
+material = ExtResource("2_3g83h")
+
+[node name="TurretHead" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+mesh = SubResource("CylinderMesh_23ox4")
+material = ExtResource("2_3g83h")
+
+[node name="Tracks" type="CSGMesh3D" parent="."]
+transform = Transform3D(-2.18557e-08, 1.25, 0, -0.5, -5.46392e-08, 0, 0, 0, 1.25, 0, 0.250009, 0)
+mesh = SubResource("TubeTrailMesh_gyys5")
+material = ExtResource("2_3g83h")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.625, -0.875296)
+radius = 0.1
+height = 0.75
+material = ExtResource("2_3g83h")

@@ -47,12 +47,12 @@ func _get_names_container(box_name):
 
 @rpc
 func rpc_on_team_joined(player_id, team, team_color):
-	print("on team joined rpc")
+	#print("on team joined rpc")
 	# update player node
 	var player_node = Network.get_player_node_id(player_id)
 	player_node.team = team
 	player_node.team_color = team_color
-#	print("%s now has team %s with color %s" % [player_node, player_node.team, player_node.team_color])
+#	#print("%s now has team %s with color %s" % [player_node, player_node.team, player_node.team_color])
 	
 	var names_container = _get_names_container(team)
 	var player_label = load("res://Scenes/Menu/player_label_lobby.tscn").instantiate()
@@ -69,7 +69,7 @@ func rpc_on_team_joined(player_id, team, team_color):
 func rpc_on_team_left(player_id, team):
 	var names_container = _get_names_container(team)
 	var player_label = names_container.get_node("player_label_" + player_id)
-	print("player_label_" + player_id)
+	#print("player_label_" + player_id)
 	player_label.queue_free()
 
 

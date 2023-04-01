@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://2o248gplijg6"]
+
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/StateMachine.gd" id="1_bxmep"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/BaseStateClass.gd" id="2_3ed7q"]
+
+[node name="UnitStateMachine" type="Node"]
+script = ExtResource("1_bxmep")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="Rooted" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="TargetUnit" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="AttackUnit" type="Node" parent="."]
+script = ExtResource("2_3ed7q")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("2_3ed7q")

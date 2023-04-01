@@ -16,17 +16,17 @@ var peer = ENetMultiplayerPeer.new()
 func start_client(ip):
 	var create_client_res
 	if ip == "":
-		print("connecting to localhost")
+		#print("connecting to localhost")
 		create_client_res = peer.create_client("localhost", DEFAULT_PORT)
 	else:
 		create_client_res = peer.create_client(ip, DEFAULT_PORT)
-	print('res: ', create_client_res)
+	#print('res: ', create_client_res)
 	multiplayer.set_multiplayer_peer(peer)
 
 
 func get_player_node():
 	# return self playernode
-#	print("players children: ", player_controller.get_children())
+#	#print("players children: ", player_controller.get_children())
 	return player_controller.get_node(str(multiplayer.get_unique_id()))
 	
 
@@ -37,7 +37,7 @@ func get_player_node_id(id):
 func sync_teams_on_connect(id, player, team, team_color):
 	if id == multiplayer.get_unique_id():
 		var start_menu = get_node("root/MenuControlNode")
-		print("menu:", start_menu)
+		#print("menu:", start_menu)
 		start_menu.rpc_on_team_joined(player, team, team_color)
 
 
@@ -48,15 +48,19 @@ func sync_teams_on_connect(id, player, team, team_color):
 #	player_node.team = team
 #	player_node.team_color = team_color
 
-@rpc(any_peer)
+@rpc('any_peer')
 func player_switch_team(team_start, team_end):
 	pass
 	
 
-@rpc(any_peer)
-func order_move(_position):
+@rpc("any_peer")
+func order_move(position):
 	pass
 
-@rpc(any_peer)
-func order_attack(_node_path):
+@rpc("any_peer")
+func order_attack(node_path):
+	pass
+
+@rpc("any_peer")
+func order_ability(msg):
 	pass

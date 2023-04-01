@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6b0qjal0uqkb"]
+
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitManaComponent.gd" id="1_egbst"]
+
+[node name="UnitManaComponent" type="Node"]
+script = ExtResource("1_egbst")

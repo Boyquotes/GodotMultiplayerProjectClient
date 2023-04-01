@@ -32,7 +32,7 @@ func join_smallest_team(player_id):
 		elif _team.team_size() < smallest_team.team_size():
 			smallest_team = _team
 	
-#	print("smallest team was ", smallest_team)
+#	#print("smallest team was ", smallest_team)
 	if not smallest_team.is_full():
 		join_team(player_id, smallest_team.name)
 		return smallest_team.name
@@ -48,23 +48,23 @@ func join_team(player_id : int, team_name : String):
 	
 	num_players += 1
 	team_dict[team_name].add_member(player_id)
-#	print("current teams: ", team_dict)
+#	#print("current teams: ", team_dict)
 	emit_signal("team_joined", str(player_id), team_name)
 	
 func leave_team(player_id : int, team_name : String):
 	num_players -= 1
 	team_dict[team_name].remove_member(player_id)
-	print(player_id, " left team ", team_name)
+	#print(player_id, " left team ", team_name)
 	emit_signal("team_left", str(player_id), team_name)
 	
 func switch_team(player_id : int, team_start : String, team_end : String):
 	if team_dict[team_end].is_full():
 		push_error("Tried to switch %s to team %s (full)" % [player_id, team_end])
 	else:
-		print("Switched player %s from team %s to team %s" % [player_id, team_start, team_end])
+		#print("Switched player %s from team %s to team %s" % [player_id, team_start, team_end])
 		team_dict[team_start].remove_member(player_id)
 		team_dict[team_end].add_member(player_id)
-	print(player_id, " left team ", team_start)
+	#print(player_id, " left team ", team_start)
 	emit_signal("team_left", str(player_id), team_start)
 	emit_signal("team_joined", str(player_id), team_end)
 

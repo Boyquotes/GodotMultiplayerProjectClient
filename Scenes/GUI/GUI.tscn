@@ -1,0 +1,274 @@
+[gd_scene load_steps=13 format=3 uid="uid://8wvhmhig35qm"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/GUI.gd" id="1_qyb2k"]
+[ext_resource type="PackedScene" uid="uid://ddul610kae2dx" path="res://Scenes/UI/PlayerUI/ability_progress_button.tscn" id="2_bs1qy"]
+[ext_resource type="Texture2D" uid="uid://dj2ou1oiacaqo" path="res://Assets/UI/Textures/gray_texture.png" id="3_0uuyv"]
+[ext_resource type="PackedScene" uid="uid://cat0li255s6oy" path="res://Scenes/UI/PlayerUI/stats_container.tscn" id="3_w7lno"]
+[ext_resource type="PackedScene" uid="uid://drkww4vwx1i71" path="res://Scenes/GUI/Bars/announcements.tscn" id="5_ab8ve"]
+[ext_resource type="PackedScene" uid="uid://b8c50uvm6hlau" path="res://Scenes/GUI/Bars/health_progress_bar.tscn" id="5_dffk8"]
+[ext_resource type="Texture2D" uid="uid://doktn5sfgqwsu" path="res://Assets/UI/Textures/map.png" id="6_jqw1f"]
+
+[sub_resource type="Gradient" id="Gradient_rag2x"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_74pne"]
+gradient = SubResource("Gradient_rag2x")
+
+[sub_resource type="Gradient" id="Gradient_ygiaj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2lyal"]
+gradient = SubResource("Gradient_ygiaj")
+fill_from = Vector2(0.1, 1)
+fill_to = Vector2(0.2, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lvm57"]
+
+[node name="GUI" type="MarginContainer" node_paths=PackedStringArray("announcement_box", "health_bar", "stats_container", "bar_container", "abilities_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qyb2k")
+announcement_box = NodePath("HBoxContainer/VBoxContainer2/AnnouncementBox")
+health_bar = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars/HealthProgressBar")
+stats_container = NodePath("HBoxContainer/VBoxContainer/StatsBG/MarginContainer/StatsContainer")
+bar_container = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars")
+abilities_container = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Abilities")
+ability_button = ExtResource("2_bs1qy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="ExamineBG" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_0uuyv")
+
+[node name="StatsBG" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+texture = ExtResource("3_0uuyv")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/StatsBG"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+
+[node name="StatsContainer" parent="HBoxContainer/VBoxContainer/StatsBG/MarginContainer" instance=ExtResource("3_w7lno")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="AnnouncementBox" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("5_ab8ve")]
+layout_mode = 2
+
+[node name="CenterBG" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 180)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+texture = SubResource("GradientTexture2D_74pne")
+
+[node name="BottomMargins" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/CenterBG"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="BottomRows" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins"]
+layout_mode = 2
+
+[node name="Abilities" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Bars" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealthProgressBar" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars" instance=ExtResource("5_dffk8")]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ScoreBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = SubResource("GradientTexture2D_2lyal")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG"]
+clip_contents = true
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeamScoreMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin"]
+layout_mode = 2
+texture = ExtResource("3_0uuyv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "99"
+label_settings = SubResource("LabelSettings_lvm57")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScoreMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/PlayerScoreMargin"]
+layout_mode = 2
+texture = ExtResource("3_0uuyv")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/PlayerScoreMargin/TextureRect"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10/10"
+label_settings = SubResource("LabelSettings_lvm57")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CSMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/CSMargin"]
+layout_mode = 2
+texture = ExtResource("3_0uuyv")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/CSMargin/TextureRect"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 16.0
+offset_right = 42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "999 CS"
+label_settings = SubResource("LabelSettings_lvm57")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TimeMargin"]
+layout_mode = 2
+texture = ExtResource("3_0uuyv")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TimeMargin/TextureRect"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "999:99"
+label_settings = SubResource("LabelSettings_lvm57")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+texture = ExtResource("3_0uuyv")
+
+[node name="MapBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+texture = ExtResource("3_0uuyv")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/MapBG"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer3/MapBG/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("6_jqw1f")

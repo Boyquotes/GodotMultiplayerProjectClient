@@ -1,0 +1,121 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacter.gd" id="1_ejaaj"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/ability_timer.gd" id="2_xuese"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/windup_timer.gd" id="3_kb4y1"]
+[ext_resource type="PackedScene" uid="uid://db6laxtr6t35e" path="res://Scenes/UI/PlayerHealthBar.tscn" id="4_xqthg"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/StateMachine.gd" id="5_fuu20"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateIdle.gd" id="6_368hq"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateWalk.gd" id="7_2wbew"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateWalkToTarget.gd" id="8_q3c55"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateAttackWindup.gd" id="9_toegh"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateAttackCooldown.gd" id="10_atp1u"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/PlayerStates/Old/StateAbilityWindup.gd" id="11_3be2j"]
+
+
+[sub_resource type="PackedScene" id="PackedScene_yuero"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741825, 1073741824, 5, 4, 2, 0),
+"editable_instances": [],
+"names": PackedStringArray("AbilityTimer", "Timer", "one_shot", "script", "_on_timeout", "timeout"),
+"node_count": 1,
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0),
+"variants": [true, ExtResource("2_xuese")],
+"version": 2
+}
+
+[sub_resource type="PackedScene" id="PackedScene_7if6i"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("WindupTimer", "Timer", "one_shot", "script"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0),
+"variants": [true, ExtResource("3_kb4y1")],
+"version": 2
+}
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_48vcv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pcdl7"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wnw82"]
+properties/0/path = NodePath(".:sync_state")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "state_machine", "PlayerHealthBar", "projectiles_container", "ability_timer_container") groups=["Unit"]]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_ejaaj")
+nav_agent = NodePath("PlayerNavAgent")
+state_machine = NodePath("StateMachine")
+PlayerHealthBar = NodePath("")
+projectiles_container = NodePath("PlayerCharacterProjectilesNode")
+ability_timer_container = NodePath("AbilityTimerContainer")
+cooldown_timer_scene = SubResource("PackedScene_yuero")
+windup_timer_scene = SubResource("PackedScene_7if6i")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("4_xqthg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+
+[node name="PlayerMesh3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_48vcv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_pcdl7")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wnw82")
+
+[node name="PlayerNavAgent" type="NavigationAgent3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_fuu20")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_368hq")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("7_2wbew")
+
+[node name="WalkToTarget" type="Node" parent="StateMachine"]
+script = ExtResource("8_q3c55")
+
+[node name="UpdatePathTimer" type="Timer" parent="StateMachine/WalkToTarget"]
+wait_time = 0.1
+
+[node name="AttackWindup" type="Node" parent="StateMachine" node_paths=PackedStringArray("windup_timer", "aa_node")]
+script = ExtResource("9_toegh")
+windup_timer = NodePath("AttackWindupTimer")
+aa_node = NodePath("../../PlayerCharacterProjectilesNode")
+
+[node name="AttackWindupTimer" type="Timer" parent="StateMachine/AttackWindup"]
+wait_time = 0.3
+
+[node name="AttackCooldown" type="Node" parent="StateMachine" node_paths=PackedStringArray("cooldown_timer")]
+script = ExtResource("10_atp1u")
+cooldown_timer = NodePath("AttackCooldownTimer")
+
+[node name="AttackCooldownTimer" type="Timer" parent="StateMachine/AttackCooldown"]
+wait_time = 0.7
+
+[node name="AbilityWindup" type="Node" parent="StateMachine"]
+script = ExtResource("11_3be2j")
+
+[node name="AutoAttackSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Projectiles/PlaceHolderAutoAttack.tscn")
+spawn_path = NodePath("../PlayerCharacterProjectilesNode")
+
+[node name="PlayerCharacterProjectilesNode" type="Node" parent="."]
+
+[node name="AbilityTimerContainer" type="Node" parent="."]
+
+[connection signal="timeout" from="StateMachine/WalkToTarget/UpdatePathTimer" to="StateMachine/WalkToTarget" method="_on_update_path_timer_timeout"]
+[connection signal="timeout" from="StateMachine/AttackWindup/AttackWindupTimer" to="StateMachine/AttackWindup" method="_on_attack_windup_timer_timeout"]
+[connection signal="timeout" from="StateMachine/AttackCooldown/AttackCooldownTimer" to="StateMachine/AttackCooldown" method="_on_attack_cooldown_timer_timeout"]

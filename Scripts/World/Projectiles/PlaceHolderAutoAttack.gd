@@ -20,7 +20,7 @@ func _ready():
 
 #func _on_area_3d_body_entered(body : Node3D):
 #	if body == target:
-#		print("I hit you! ", body)
+#		#print("I hit you! ", body)
 #		queue_free()
 #	else:
-#		print("aa hit something different: ", body)
+#		#print("aa hit something different: ", body)

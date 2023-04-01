@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0kerhbctaty6"]
+
+[ext_resource type="Script" path="res://Scenes/World/Utilities/TowerGroupNode.gd" id="1_pn5um"]
+
+[node name="Towers" type="Node3D"]
+script = ExtResource("1_pn5um")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Units/NPCs/TowerNPC.tscn", "res://Scenes/Units/NPCs/NexusNPC.tscn")
+spawn_path = NodePath("..")

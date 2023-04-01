@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://qqlkcfnes3re"]
+
+[ext_resource type="Texture2D" uid="uid://cfggj8psxe238" path="res://Assets/UI/Textures/black_texture.png" id="1_wd1b8"]
+[ext_resource type="Texture2D" uid="uid://iyli7ejamdw8" path="res://Assets/UI/Textures/white_texture.png" id="2_sulqf"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUI/experience_progress_bar.gd" id="3_6fei8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0fs0t"]
+font_color = Color(0, 1, 0, 1)
+
+[node name="ExperienceProgressBar" type="TextureProgressBar" node_paths=PackedStringArray("xp_current_label", "xp_max_label")]
+offset_right = 450.0
+offset_bottom = 31.0
+size_flags_vertical = 3
+value = 70.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_wd1b8")
+texture_progress = ExtResource("2_sulqf")
+script = ExtResource("3_6fei8")
+xp_current_label = NodePath("HBoxContainer/ExperienceCurrentLabel")
+xp_max_label = NodePath("HBoxContainer/ExperienceMaxLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExperienceCurrentLabel" type="Label" parent="HBoxContainer"]
+offset_top = 2.0
+offset_right = 37.0
+offset_bottom = 28.0
+text = "1000"
+label_settings = SubResource("LabelSettings_0fs0t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExperienceSeparatorLabel" type="Label" parent="HBoxContainer"]
+offset_left = 41.0
+offset_top = 2.0
+offset_right = 48.0
+offset_bottom = 28.0
+text = "/"
+label_settings = SubResource("LabelSettings_0fs0t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExperienceMaxLabel" type="Label" parent="HBoxContainer"]
+offset_left = 52.0
+offset_top = 2.0
+offset_right = 89.0
+offset_bottom = 28.0
+text = "1000"
+label_settings = SubResource("LabelSettings_0fs0t")
+horizontal_alignment = 1
+vertical_alignment = 1

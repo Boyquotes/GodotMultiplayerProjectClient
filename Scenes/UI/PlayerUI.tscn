@@ -1,0 +1,334 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dj2ou1oiacaqo" path="res://Assets/UI/Textures/gray_texture.png" id="1_e6yfk"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="1_ywak2"]
+[ext_resource type="PackedScene" uid="uid://ddul610kae2dx" path="res://Scenes/UI/PlayerUI/ability_progress_button.tscn" id="2_mmynu"]
+[ext_resource type="PackedScene" uid="uid://cat0li255s6oy" path="res://Scenes/UI/PlayerUI/stats_container.tscn" id="4_20jp5"]
+[ext_resource type="PackedScene" uid="uid://f0da7e5mleho" path="res://Scenes/UI/PlayerUI/mana_progress_bar.tscn" id="5_62wui"]
+[ext_resource type="PackedScene" uid="uid://bdd7hxpg2lfda" path="res://Scenes/UI/PlayerUI/health_progress_bar.tscn" id="6_vkuw6"]
+[ext_resource type="PackedScene" uid="uid://qqlkcfnes3re" path="res://Scenes/UI/PlayerUI/experience_progress_bar.tscn" id="7_mjocd"]
+[ext_resource type="Texture2D" uid="uid://doktn5sfgqwsu" path="res://Assets/UI/Textures/map.png" id="8_dmyt8"]
+
+
+[sub_resource type="Gradient" id="Gradient_ynhpq"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t01pk"]
+gradient = SubResource("Gradient_ynhpq")
+
+[sub_resource type="Gradient" id="Gradient_yrtlm"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cgcp7"]
+gradient = SubResource("Gradient_yrtlm")
+fill_from = Vector2(0.1, 1)
+fill_to = Vector2(0.2, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0g4eg"]
+
+[node name="PlayerUI" type="MarginContainer" node_paths=PackedStringArray("health_bar", "mana_bar", "experience_bar", "stats_container", "abilities_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywak2")
+health_bar = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars/HealthProgressBar")
+mana_bar = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars/ManaProgressBar")
+experience_bar = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars/ExperienceProgressBar")
+stats_container = NodePath("HBoxContainer/VBoxContainer/StatsBG/MarginContainer/StatsContainer")
+abilities_container = NodePath("HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Abilities")
+ability_button = ExtResource("2_mmynu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+offset_right = 200.0
+offset_bottom = 1080.0
+size_flags_horizontal = 2
+
+[node name="ExamineBG" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_e6yfk")
+
+[node name="StatsBG" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+offset_top = 880.0
+offset_right = 200.0
+offset_bottom = 1080.0
+size_flags_horizontal = 0
+size_flags_vertical = 10
+texture = ExtResource("1_e6yfk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/StatsBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+
+[node name="StatsContainer" parent="HBoxContainer/VBoxContainer/StatsBG/MarginContainer" instance=ExtResource("4_20jp5")]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+offset_left = 709.0
+offset_right = 1209.0
+offset_bottom = 1080.0
+size_flags_horizontal = 6
+
+[node name="CenterBG" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 180)
+offset_top = 900.0
+offset_right = 500.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+size_flags_vertical = 10
+texture = SubResource("GradientTexture2D_t01pk")
+
+[node name="BottomMargins" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/CenterBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="BottomRows" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 475.0
+offset_bottom = 170.0
+
+[node name="Abilities" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows"]
+offset_right = 450.0
+offset_bottom = 70.0
+size_flags_vertical = 3
+
+[node name="Bars" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows"]
+offset_top = 74.0
+offset_right = 450.0
+offset_bottom = 145.0
+size_flags_vertical = 3
+
+[node name="HealthProgressBar" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars" instance=ExtResource("6_vkuw6")]
+offset_bottom = 21.0
+
+[node name="ManaProgressBar" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars" instance=ExtResource("5_62wui")]
+offset_top = 25.0
+offset_bottom = 46.0
+
+[node name="ExperienceProgressBar" parent="HBoxContainer/VBoxContainer2/CenterBG/BottomMargins/BottomRows/Bars" instance=ExtResource("7_mjocd")]
+offset_top = 50.0
+offset_bottom = 71.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+offset_left = 1620.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 10
+
+[node name="ScoreBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(300, 75)
+offset_right = 300.0
+offset_bottom = 75.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = SubResource("GradientTexture2D_cgcp7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG"]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeamScoreMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+offset_right = 72.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin"]
+offset_left = 3.0
+offset_right = 69.0
+offset_bottom = 59.0
+texture = ExtResource("1_e6yfk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+offset_left = 7.0
+offset_top = 16.0
+offset_right = 26.0
+offset_bottom = 42.0
+text = "99"
+label_settings = SubResource("LabelSettings_0g4eg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+offset_left = 30.0
+offset_top = 16.0
+offset_right = 36.0
+offset_bottom = 42.0
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TeamScoreMargin/TextureRect/HBoxContainer"]
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 59.0
+offset_bottom = 42.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScoreMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+offset_left = 76.0
+offset_right = 148.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/PlayerScoreMargin"]
+offset_left = 3.0
+offset_right = 69.0
+offset_bottom = 59.0
+texture = ExtResource("1_e6yfk")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/PlayerScoreMargin/TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10/10/10"
+label_settings = SubResource("LabelSettings_0g4eg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CSMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+offset_left = 152.0
+offset_right = 224.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/CSMargin"]
+offset_left = 3.0
+offset_right = 69.0
+offset_bottom = 59.0
+texture = ExtResource("1_e6yfk")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/CSMargin/TextureRect"]
+offset_left = 23.0
+offset_top = 16.0
+offset_right = 42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "999 CS"
+label_settings = SubResource("LabelSettings_0g4eg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer"]
+offset_left = 228.0
+offset_right = 300.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TimeMargin"]
+offset_left = 3.0
+offset_right = 69.0
+offset_bottom = 59.0
+texture = ExtResource("1_e6yfk")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/ScoreBG/HBoxContainer/TimeMargin/TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "999:99"
+label_settings = SubResource("LabelSettings_0g4eg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 100.0
+offset_top = 377.0
+offset_right = 300.0
+offset_bottom = 577.0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+texture = ExtResource("1_e6yfk")
+
+[node name="MapBG" type="TextureRect" parent="HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 100.0
+offset_top = 880.0
+offset_right = 300.0
+offset_bottom = 1080.0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+texture = ExtResource("1_e6yfk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer3/MapBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer3/MapBG/MarginContainer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("8_dmyt8")

@@ -22,7 +22,7 @@ func _ready():
 
 
 func _click_terrain(click_position):
-	print("clicked at .. : ", click_position)
+	#print("clicked at .. : ", click_position)
 	
 	if last_waypoint_flag:
 		last_waypoint_flag.queue_free()

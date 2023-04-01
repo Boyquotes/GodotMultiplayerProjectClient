@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bgvym4hpry3c3"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Characters/BaseCharacterResource.gd" id="1_h28q5"]
+[ext_resource type="Resource" path="res://Assets/Abilities/FireballSkillShotAbility.tres" id="1_qwfus"]
+
+[resource]
+script = ExtResource("1_h28q5")
+hp = 1000
+hp_growth = 100
+hp_regen = 10
+hp_regen_growth = 5
+mana = 1000
+mana_growth = 100
+mana_regen = 10
+mana_regen_growth = 5
+attack_range = 10
+attack_range_growth = null
+attack_speed = 1.5
+attack_speed_growth = null
+attack_windup = 0.6
+speed = 5
+ability_resource_array = [ExtResource("1_qwfus")]

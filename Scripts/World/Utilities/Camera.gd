@@ -81,7 +81,7 @@ func _process(delta):
 		
 
 func toggle_camera_lock():
-#	print(player_cam)
+#	#print(player_cam)
 	if locked_camera:
 		locked_camera = false
 #		clear_current()
@@ -92,5 +92,5 @@ func toggle_camera_lock():
 #		player_cam.current = true
 #		player_cam.clear_current()
 #		self.make_current()# = false
-#		print(player_cam.get_camera_transform)
+#		#print(player_cam.get_camera_transform)
 #		self.transform.origin = player_cam.get_camera_transform().origin

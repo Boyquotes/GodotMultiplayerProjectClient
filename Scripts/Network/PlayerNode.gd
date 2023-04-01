@@ -31,23 +31,23 @@ var character_resource
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	print("Player Created. Name: %s" % player_name)
+#	#print("Player Created. Name: %s" % player_name)
 
 	# should be done on game start instead of player joining
-#	print("loading player model")
+#	#print("loading player model")
 #	var player_character = preload("res://Scenes/Player/PlayerCharacter.tscn")
 #	var player_character_instance = player_character.instantiate()
 #	player_character_instance.transform.origin = Vector3(randf_range(-9,9), 1.5, randf_range(-9,9))
 #	add_child(player_character_instance)
-#	print("Instantiated Player %s at position " % player_name, player_character_instance.transform.origin)
+#	#print("Instantiated Player %s at position " % player_name, player_character_instance.transform.origin)
 
 	# pass stuff to playercontroller
 	if self.name == str(Network.multiplayer.get_unique_id()):
 		get_parent().my_player_node = self
-#		print(get_parent(), " was assigned: ", self)
+#		#print(get_parent(), " was assigned: ", self)
 
 	else:
-#		print("aaaaa", get_parent().name)
+#		#print("aaaaa", get_parent().name)
 		pass
 
 
@@ -56,17 +56,17 @@ func _ready():
 #	pass
 
 #func spawn_player_character(slot):
-#	print("loading player model")
+#	#print("loading player model")
 #	var player_character = preload("res://Scenes/Player/PlayerCharacter.tscn")
 #	character_node = player_character.instantiate()
 #	character_node.transform.origin = Vector3(2*slot, 1.5, 2*slot)
 #	add_child(character_node)
-#	print("Instantiated Player %s at position " % player_name, character_node.transform.origin)
+#	#print("Instantiated Player %s at position " % player_name, character_node.transform.origin)
 
 
 #func _notification(what):
 #	if what == NOTIFICATION_PREDELETE:
-#		print("Player deleted. Name: %s" % player_name)
+#		#print("Player deleted. Name: %s" % player_name)
 
 
 

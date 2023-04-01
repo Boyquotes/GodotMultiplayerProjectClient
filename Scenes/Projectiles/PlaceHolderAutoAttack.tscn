@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://6f17rqdlfk5o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0pfs7"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8eqff"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="PlaceHolderAutoAttack" type="Node3D"]
+top_level = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.1, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_0pfs7")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8eqff")

@@ -18,13 +18,13 @@ var attack_speed : float = 2
 
 @export @onready var current_hp : int = max_hp :
 	set(value):
-#		print("current_hp was changed: ", current_hp)
+#		#print("current_hp was changed: ", current_hp)
 		current_hp = value
 		emit_signal("health_changed", value)
 
 var sync_state:
 #	get:
-#		print("get sync state")
+#		#print("get sync state")
 #		var buf = PackedByteArray()
 #		buf.resize(16)
 #		buf.encode_u16(0, speed)
@@ -38,7 +38,7 @@ var sync_state:
 #		return buf
 	set(value):
 		if value:
-#			print("received sync state: ", value)
+#			#print("received sync state: ", value)
 			speed = value.decode_u16(0)
 			attack_range = value.decode_u16(2)
 			max_hp = value.decode_u16(4)

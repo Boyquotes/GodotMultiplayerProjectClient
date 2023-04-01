@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Abilities/SkillShotAbilityResource.gd" id="1_s1vo7"]
+[ext_resource type="Texture2D" uid="uid://b4v25oj4rpil3" path="res://Assets/UI/Textures/AbilityIcons/fireball.png" id="1_uf1e3"]
+[ext_resource type="PackedScene" uid="uid://btuhjaxsm7xg1" path="res://Scenes/Projectiles/FireballProjectile.tscn" id="2_1f0yt"]
+
+[resource]
+script = ExtResource("1_s1vo7")
+ability_name = "Fireball"
+ability_type = 4
+ability_description = "Shoots a fireball at target position"
+ability_levels = 5
+damage_array = PackedInt64Array(50, 100, 150, 175, 200)
+scaling_array = PackedFloat64Array(1, 1, 1, 1, 1)
+range_array = PackedInt64Array(15, 15, 15, 15, 15)
+cooldown_array = PackedFloat64Array(5, 4, 3, 2, 1)
+windup_array = PackedFloat64Array(0.3, 0.3, 0.3, 0.3, 0.3)
+ability_icon = ExtResource("1_uf1e3")
+ability_scene = ExtResource("2_1f0yt")

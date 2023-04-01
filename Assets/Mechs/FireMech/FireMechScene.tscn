@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://1v58xpqj2w4m"]
+
+[ext_resource type="PackedScene" uid="uid://bdgmn7aifxwnq" path="res://Assets/Mechs/FireMech/firemech.glb" id="1_eve3t"]
+
+[node name="FireMech" instance=ExtResource("1_eve3t")]

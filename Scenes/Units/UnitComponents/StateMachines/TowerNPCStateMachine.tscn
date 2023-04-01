@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://x2qoan7ft8ok"]
+
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/TowerNPCStates/TowerNPCStateMachine.gd" id="1_25ss6"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/StateMachine/BaseStateClass.gd" id="2_skjf0"]
+
+[node name="TowerNPCStateMachine" type="Node"]
+script = ExtResource("1_25ss6")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_skjf0")
+
+[node name="AttackUnit" type="Node" parent="."]
+script = ExtResource("2_skjf0")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("2_skjf0")

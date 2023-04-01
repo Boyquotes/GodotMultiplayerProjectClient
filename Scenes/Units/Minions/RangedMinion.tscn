@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://e0x3xu0j1dth"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Minions/MinionUnit.gd" id="1_ngumi"]
+[ext_resource type="Resource" uid="uid://v6t2ojkh17f1" path="res://Assets/Minions/RangedMinion/RangedMinionResource.tres" id="2_wie2k"]
+[ext_resource type="PackedScene" uid="uid://om8gyttcmxuu" path="res://Assets/Minions/RangedMinion/RangedMinionScene.tscn" id="3_veuyt"]
+[ext_resource type="PackedScene" uid="uid://b5e2m7a007uq7" path="res://Scenes/UI/NPCHealthBar.tscn" id="4_4s6x2"]
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/UnitSceneScript.gd" id="4_pcs3u"]
+[ext_resource type="PackedScene" uid="uid://2p6ey3mawarx" path="res://Scenes/Units/UnitComponents/StateMachines/MinionStateMachine.tscn" id="6_xfpv2"]
+[ext_resource type="PackedScene" uid="uid://sf4mqh1krqaw" path="res://Scenes/Units/UnitComponents/UnitAnimationManager.tscn" id="7_wk8kl"]
+[ext_resource type="PackedScene" uid="uid://bb37puc16hplk" path="res://Scenes/Units/UnitComponents/AutoAttackComponent.tscn" id="9_71p8g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bwo5r"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2d8sv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("MinionStateMachine:network_state_name")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:mp_sync")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="RangedMinion" type="CharacterBody3D" node_paths=PackedStringArray("state_machine", "HealthBar", "animation_manager", "unit_scene") groups=["Unit"]]
+collision_layer = 7
+collision_mask = 4
+script = ExtResource("1_ngumi")
+state_machine = NodePath("MinionStateMachine")
+HealthBar = NodePath("HealthBarNode")
+animation_manager = NodePath("AnimationManager")
+character_resource = ExtResource("2_wie2k")
+unit_scene = NodePath("RangedMinionScene")
+
+[node name="RangedMinionScene" parent="." instance=ExtResource("3_veuyt")]
+script = ExtResource("4_pcs3u")
+
+[node name="HealthBarNode" parent="." instance=ExtResource("4_4s6x2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_bwo5r")
+
+[node name="MinionStateMachine" parent="." instance=ExtResource("6_xfpv2")]
+
+[node name="AnimationManager" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("7_wk8kl")]
+state_machine = NodePath("../MinionStateMachine")
+
+[node name="AutoAttackComponent" parent="." instance=ExtResource("9_71p8g")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2d8sv")

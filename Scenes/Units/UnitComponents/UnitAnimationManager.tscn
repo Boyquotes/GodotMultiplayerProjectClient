@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sf4mqh1krqaw"]
+
+[ext_resource type="Script" path="res://Scripts/Units/UnitComponents/AnimationManager.gd" id="1_ejt2x"]
+
+[node name="AnimationManager" type="Node"]
+script = ExtResource("1_ejt2x")
